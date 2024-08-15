@@ -98,6 +98,10 @@
             document.getElementById('energy-count').textContent = energy
             if energy > 0:
                 enable_buttons()
+    
+    # Start energy regeneration
+    setInterval(regenerate_energy, regen_interval)
+
 
     # Bind functions to buttons
     document.getElementById('gather-wood').onclick = lambda e: gather_resource('wood')
