@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #2f4f4f;
+}
+
+#energy, #resources {
+    margin: 20px 0;
+}
+
+#resources p, #energy p {
+    font-size: 1.2em;
+}
+
+#buttons {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px solid #2f4f4f;
+    border-radius: 5px;
+    background-color: #add8e6;
+    color: #2f4f4f;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
