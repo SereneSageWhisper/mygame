@@ -25,7 +25,7 @@
     </div>
 
     <py-script>
-        from js import document, localStorage, setInterval, create_proxy
+        from js import document, localStorage, setInterval, create_once_callable
 
         # Initial values
         wood_count = 0
@@ -110,7 +110,7 @@
         load_progress()
 
         # Start energy regeneration
-        regenerate_proxy = create_proxy(regenerate_energy)
+        regenerate_proxy = create_once_callable(regenerate_energy)
         setInterval(regenerate_proxy, regen_interval)
 
     </py-script>
