@@ -19,7 +19,16 @@ h1 {
 }
 
 #buttons {
-    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+#save-progress {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 button {
