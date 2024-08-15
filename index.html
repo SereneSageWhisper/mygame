@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Island Adventure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+    <h1>Island Adventure</h1>
+    <div id="map"></div>
+    <div id="energy">
+        <p>Energy: <span id="energy-count">65</span></p>
+    </div>  
+    <div id="resources">
+        <p>Wood: <span id="wood-count">0</span></p>
+        <p>Stone: <span id="stone-count">0</span></p>
+        <p>Food: <span id="food-count">0</span></p>
+    </div>
+    <button id="gather-wood">Gather Wood</button>
+    <button id="gather-stone">Gather Stone</button>
+    <button id="gather-food">Gather Food</button>
+    <button id="save-progress">Save Progress</button>
+
+<py-script>
+    from js import document, localStorage, setInterval
+
+    # Initial values
+    wood_count = 0
+    stone_count = 0
+    food_count = 0
+    energy = 65
+    max_energy = 65  # Maximum energy player can have
+    energy_regen_rate = 1  # Amount of energy to regenerate
+    regen_interval = 10000  # Time in milliseconds (10000ms = 10 seconds)
+
+    def load_progress():
+        global wood_count, stone_count, food_count, energy
+        if localStorage.getItem('wood_count') is not None:
+            wood_count = int(localStorage.getItem('wood_count'))
+            document.getElementById('wood-count').textContent = wood_count
+        if localStorage.getItem('stone_count') is not None:
+            stone_count = int(localStorage.getItem('stone_count'))
+            document.getElementById('stone-count').textContent = stone_count
+        if localStorage.getItem('food_count') is not None:
+            food_count = int(localStorage.getItem('food_count'))
+            document.getElementById('food-count').textContent = food_count
+        if localStorage.getItem('energy') is not None:
+            energy = int(localStorage.getItem('energy'))
+            document.getElementById('energy-count').textContent = energy
+
+    def save_progress():
+        localStorage.setItem('wood_count', wood_count)
+        localStorage.setItem('stone_count', stone_count)
+        localStorage.setItem('food_count', food_count)
+        localStorage.setItem('energy', energy)
+        alert("Progress saved!")
+
+    def update_energy(amount):
+        global energy
+        energy -= amount
+        document.getElementById('energy-count').textContent = energy
+        if energy <= 0:
+            disable_buttons()
+
+    def gather_resource(resource):
+        global wood_count, stone_count, food_count
+        if resource == 'wood':
+            wood_count += 1
+            document.getElementById('wood-count').textContent = wood_count
+            update_energy(2)
+        elif resource == 'stone':
+            stone_count += 1
+            document.getElementById('stone-count').textContent = stone_count
+            update_energy(3)
+        elif resource == 'food':
+            food_count += 1
+            document.getElementById('food-count').textContent = food_count
+            update_energy(4)
+
+    def disable_buttons():
+        document.getElementById('gather-wood').disabled = True
+        document.getElementById('gather-stone').disabled = True
+        document.getElementById('gather-food').disabled = True
+
+    def enable_buttons():
+        document.getElementById('gather-wood').disabled = False
+        document.getElementById('gather-stone').disabled = False
+        document.getElementById('gather-food').disabled = False
+
+    def regenerate_energy():
+        global energy
+        if energy < max_energy:
+            energy += energy_regen_rate
+            if energy > max_energy:
+                energy = max_energy
+            document.getElementById('energy-count').textContent = energy
+            if energy > 0:
+                enable_buttons()
+
+    # Bind functions to buttons
+    document.getElementById('gather-wood').onclick = lambda e: gather_resource('wood')
+    document.getElementById('gather-stone').onclick = lambda e: gather_resource('stone')
+    document.getElementById('gather-food').onclick = lambda e: gather_resource('food')
+    document.getElementById('save-progress').onclick = lambda e: save_progress()
+
+    # Load progress on startup
+    load_progress()
+
+    # Start energy regeneration
+    setInterval(regenerate_energy, regen_interval)
+
+</py-script>
+    
+    
+        
+
+        </body>
+</html>
