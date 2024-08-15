@@ -30,7 +30,7 @@
         let foodCount = 0;
         let energy = 65;
         const maxEnergy = 65;
-        const energyRegenRate = 1; // Amount of energy to regenerate
+        const energyRegenRate = 5; // Amount of energy to regenerate
         const regenInterval = 10000; // Time in milliseconds (10000ms = 10 seconds)
 
         // Load progress from localStorage
@@ -59,7 +59,6 @@
             localStorage.setItem('stoneCount', stoneCount);
             localStorage.setItem('foodCount', foodCount);
             localStorage.setItem('energy', energy);
-            alert("Progress saved!");
         }
 
         // Update energy and disable buttons if necessary
