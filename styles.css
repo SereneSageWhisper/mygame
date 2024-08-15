@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    text-align: center;
+}
+
+#map {
+    width: 80%;
+    height: 300px;
+    margin: 20px auto;
+    border: 2px solid #333;
+    background-color: #c2f0c2;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#resources {
+    margin: 20px auto;
+    width: 50%;
+}
