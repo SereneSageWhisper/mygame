@@ -10,6 +10,8 @@
     <h1>Island Adventure</h1>
     <div id="energy">
         <p>Energy: <span id="energy-count">65</span></p>
+        <p>Level: <span id="level">1</span></p>
+        <p>XP: <span id="xp">0</span></p>
     </div>  
     <div id="resources">
         <p>Wood: <span id="wood-count">0</span></p>
@@ -29,9 +31,12 @@
         let stoneCount = 0;
         let foodCount = 0;
         let energy = 65;
+        let xp = 0;
+        let level = 1;
         const maxEnergy = 65;
-        const energyRegenRate = 5; // Amount of energy to regenerate
-        const regenInterval = 10000; // Time in milliseconds (10000ms = 10 seconds)
+        const energyRegenRate = 5;
+        const regenInterval = 10000;
+        const xpThresholds = [100, 250, 500]; // XP required for levels 2, 3, and 4
 
         // Load progress from localStorage
         function loadProgress() {
@@ -51,6 +56,14 @@
                 energy = parseInt(localStorage.getItem('energy'));
                 document.getElementById('energy-count').textContent = energy;
             }
+            if (localStorage.getItem('xp')) {
+                xp = parseInt(localStorage.getItem('xp'));
+                document.getElementById('xp').textContent = xp;
+            }
+            if (localStorage.getItem('level')) {
+                level = parseInt(localStorage.getItem('level'));
+                document.getElementById('level').textContent = level;
+            }
         }
 
         // Save progress to localStorage
@@ -59,6 +72,8 @@
             localStorage.setItem('stoneCount', stoneCount);
             localStorage.setItem('foodCount', foodCount);
             localStorage.setItem('energy', energy);
+            localStorage.setItem('xp', xp);
+            localStorage.setItem('level', level);
         }
 
         // Update energy and disable buttons if necessary
@@ -69,22 +84,35 @@
                 disableButtons();
             }
         }
-
-        // Gather resources and update energy
+        
+        // Check if player should level up
+        function checkLevelUp() {
+            if (level < xpThresholds.length && xp >= xpThresholds[level - 1]) {
+                level += 1;
+                document.getElementById('level').textContent = level;
+            }
+        }
+        
+        // Gather resources and update energy and XP
         function gatherResource(resource) {
             if (resource === 'wood') {
                 woodCount += 1;
                 document.getElementById('wood-count').textContent = woodCount;
                 updateEnergy(2);
+                xp += 3; // Wood gives 3 XP
             } else if (resource === 'stone') {
                 stoneCount += 1;
                 document.getElementById('stone-count').textContent = stoneCount;
                 updateEnergy(3);
+                xp += 2; // Stone gives 2 XP
             } else if (resource === 'food') {
                 foodCount += 1;
                 document.getElementById('food-count').textContent = foodCount;
                 updateEnergy(4);
+                xp += 4; // Food gives 4 XP
             }
+            document.getElementById('xp').textContent = xp;
+            checkLevelUp();
         }
 
         // Disable buttons when energy is depleted
