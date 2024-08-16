@@ -11,12 +11,20 @@ h1 {
     color: #f0f8ff;
 }
 
-#energy, #resources {
+#resources {
     margin: 20px 0;
     position: fixed; /* Fixing the position to the top left corner */
     top: 20px; /* Adjust this to move the stats further down or up */
     left: 20px; /* Adjust this to move the stats further left or right */
     text-align: left; /* Align text to the left */
+}
+
+#energy {
+    margin: 20px 0;
+    position: fixed; /* Fixing the position to the top left corner */
+    top: 20px; /* Adjust this to move the stats further down or up */
+    right: 20px; /* Adjust this to move the stats further left or right */
+    text-align: right; /* Align text to the left */
 }
 
 #resources p, #energy p {
