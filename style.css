@@ -1,21 +1,27 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f0f8ff;
+    background-color: #2f4f4f; /* Darker background color */
     margin: 0;
     padding: 20px;
+    color: #f0f8ff; /* Light text color for contrast */
 }
 
 h1 {
-    color: #2f4f4f;
+    color: #f0f8ff;
 }
 
 #energy, #resources {
     margin: 20px 0;
+    position: fixed; /* Fixing the position to the top left corner */
+    top: 20px; /* Adjust this to move the stats further down or up */
+    left: 20px; /* Adjust this to move the stats further left or right */
+    text-align: left; /* Align text to the left */
 }
 
 #resources p, #energy p {
     font-size: 1.2em;
+    margin: 5px 0; /* Adding some margin between the paragraphs */
 }
 
 #buttons {
@@ -36,7 +42,7 @@ button {
     font-size: 1em;
     margin: 5px;
     cursor: pointer;
-    border: 1px solid #2f4f4f;
+    border: 1px solid #f0f8ff;
     border-radius: 5px;
     background-color: #add8e6;
     color: #2f4f4f;
