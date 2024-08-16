@@ -10,8 +10,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+const app = initializeApp(firebaseConfig);
+const auth = auth();
+const analytics = getAnalytics(app);
 
 // Function to register a new user
 function registerUser(username, password) {
